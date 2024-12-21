@@ -1,4 +1,4 @@
-﻿namespace MusicTheoryAPI.Model.Components
+﻿namespace MusicTheoryAPI.Model.Component
 {
     public class Note
     {
