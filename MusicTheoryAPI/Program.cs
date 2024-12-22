@@ -5,8 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<RandomDataModel>();
-builder.Services.AddScoped<NoteService>();
+builder.Services.AddScoped<IRandomDataModel, RandomDataModel>();
+builder.Services.AddScoped<INoteService, NoteService>();
 
 var app = builder.Build();
 

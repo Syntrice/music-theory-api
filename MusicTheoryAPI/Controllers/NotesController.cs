@@ -7,15 +7,15 @@ namespace MusicTheoryAPI.Controllers
     [ApiController]
     public class NotesController : Controller
     {
-        private readonly NoteService _noteService;
-        public NotesController(NoteService noteService)
+        private readonly INoteService _noteService;
+        public NotesController(INoteService noteService)
         {
             _noteService = noteService;
         }
 
         [HttpGet()]
         [Route("random")]
-        public IActionResult Get()
+        public IActionResult GetRandomNote()
         {
             var note = _noteService.GetRandomNote();
             return Ok(note);
@@ -23,7 +23,7 @@ namespace MusicTheoryAPI.Controllers
 
         [HttpGet()]
         [Route("random/{count}")]
-        public IActionResult Get(int count)
+        public IActionResult GetRandomNotes(int count)
         {
             var notes = _noteService.GetRandomNotes(count);
             return Ok(notes);

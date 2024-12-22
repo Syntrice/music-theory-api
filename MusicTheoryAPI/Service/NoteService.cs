@@ -3,10 +3,16 @@ using MusicTheoryAPI.Model.Component;
 
 namespace MusicTheoryAPI.Service
 {
-    public class NoteService
+    public interface INoteService
     {
-        private RandomDataModel _randomDataModel;
-        public NoteService(RandomDataModel randomDataModel)
+        NoteDTO GetRandomNote();
+        List<NoteDTO> GetRandomNotes(int count);
+    }
+
+    public class NoteService : INoteService
+    {
+        private IRandomDataModel _randomDataModel;
+        public NoteService(IRandomDataModel randomDataModel)
         {
             _randomDataModel = randomDataModel;
         }
@@ -18,11 +24,14 @@ namespace MusicTheoryAPI.Service
 
         public List<NoteDTO> GetRandomNotes(int count)
         {
+            
+            List<Note> notes = _randomDataModel.GetRandomNotes(count);
             List<NoteDTO> noteDTOs = new List<NoteDTO>();
-            for (int i = 0; i < count; i++)
+            foreach (Note note in notes)
             {
-                noteDTOs.Add(NoteDTO.Map(_randomDataModel.GetRandomNote()));
+                noteDTOs.Add(NoteDTO.Map(note));
             }
+
             return noteDTOs;
         }
     }
